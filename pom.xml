@@ -90,6 +90,9 @@
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
 								</assembly>
+								<ports>
+									<port>8080</port>
+								</ports>
 							</build>
 						</image>
 					</images>
