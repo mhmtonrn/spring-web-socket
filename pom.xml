@@ -14,7 +14,7 @@
 	<name>miltron</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -79,7 +79,7 @@
 						<image>
 							<name>mbastas/${project.artifactId}</name>
 							<build>
-								<from>java:8-jdk-alpine</from>
+								<from>openjdk:17-alpine</from>
 								<entryPoint>
 									<exec>
 										<args>java</args>

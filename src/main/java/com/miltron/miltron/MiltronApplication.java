@@ -18,6 +18,8 @@ public class MiltronApplication  implements CommandLineRunner {
 	private int startPort;
 	@Value("${miltron.rocket.end.port}")
 	private int endPort;
+	@Value("${miltron.rockets.host}")
+	private String host;
 
 	@Autowired
 	private SimpMessagingTemplate client;
@@ -30,7 +32,7 @@ public class MiltronApplication  implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		ExecutorService executor = Executors.newFixedThreadPool(10);
 		for (int i = startPort; i <= endPort ; i++) {
-			ConnectionTcpServer c = new ConnectionTcpServer(client,i);
+			ConnectionTcpServer c = new ConnectionTcpServer(client,host,i);
 			executor.execute(c);
 		}
 

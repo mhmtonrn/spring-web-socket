@@ -1,6 +1,7 @@
 package com.miltron.miltron.connection;
 
 import com.miltron.miltron.utils.RawDataToTelemetryModel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import java.io.IOException;
@@ -8,12 +9,15 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class ConnectionTcpServer implements Runnable {
+    private volatile String host;
     private SimpMessagingTemplate client;
     private volatile int port;
 
-    public ConnectionTcpServer(SimpMessagingTemplate client, int port) {
+
+    public ConnectionTcpServer(SimpMessagingTemplate client,String host, int port) {
         this.port = port;
         this.client = client;
+        this.host = host;
     }
 
 
@@ -21,7 +25,8 @@ public class ConnectionTcpServer implements Runnable {
     public void run() {
 
         try {
-            Socket socket = new Socket("localhost", port);
+            System.out.println("host: "+host+ ": port: "+port);
+            Socket socket = new Socket(host, port);
             InputStream in = socket.getInputStream();
             byte[] buf = new byte[36];
             while ((in.read(buf)) != -1) {
